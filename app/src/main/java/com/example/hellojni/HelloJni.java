@@ -30,7 +30,12 @@ public class HelloJni extends AppCompatActivity {
          */
         setContentView(R.layout.activity_hello_jni);
         TextView tv = (TextView)findViewById(R.id.hello_textview);
-        tv.setText( stringFromJNI() );
+        tv.setText(stringFromJNI());
+
+        sayHello();
+
+        tv.append("\n");
+        tv.append(callLoop());
     }
     /* A native method that is implemented by the
      * 'hello-jni' native library, which is packaged
@@ -48,7 +53,13 @@ public class HelloJni extends AppCompatActivity {
      * Trying to call this function will result in a
      * java.lang.UnsatisfiedLinkError exception !
      */
-    public native String  unimplementedStringFromJNI();
+    public native String  callLoop();
+
+    public native void sayHello();
+
+    public String callFromNative(){
+        return "This is from Java!!";
+    }
 
     /* this is used to load the 'hello-jni' library on application
      * startup. The library has already been unpacked into
@@ -56,6 +67,6 @@ public class HelloJni extends AppCompatActivity {
      * installation time by the package manager.
      */
     static {
-        System.loadLibrary("hello-jni");
+        System.loadLibrary("knlib");
     }
 }

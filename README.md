@@ -1,26 +1,45 @@
 Hello KNI
 =========
 
-修改 Google 官方 Jni 例子，加入对 Kotlin Native 生成的动态库的调用。目前 Jni 与 Kotlin Native 互通仍然需要 C wrap。实际上目前 Kotlin Native 只能通过 C 来与其他语言交互，这一点也可以参照 Kotlin Native 官方的 Python 例子。
+This is a Demo of Jni calling Kotlin Native originated from Google's jni demo.
 
-### 构建步骤
+### Contents
 
-1. 安装 Kotlin Native 编译器，当然你也可以自己编译。把编译器的路径（包含 konan 命令的目录）添加到 $PATH。
-2. 运行以下命令得到 Kotlin Native 编译好的依赖：
+Kotlin Native can interop with C directly. In order to call Kotlin Native functions from Java, we should use `CName` to annotated the functions with a proper name:
+
+```kotlin
+@CName("Java_com_example_hellojni_HelloJni_stringFromJNI")
+fun stringFromJNI(env: CPointer<JNIEnvVar>, thiz: jobject): jstring {
+    memScoped {
+        return env.pointed.pointed!!.NewStringUTF!!.invoke(env, "This is from Kotlin Native!!".cstr.ptr)!!
+    }
+}
+```
+
+What's in the demo：
+
+* Uses of Android Log
+* Return a Java String
+* Call Java methods from Kotlin Native
+
+### How to Build
+
+1. Install Kotlin Native compiler, export konanc to $PATH
+2. Run this shell：
 
 	```sh
 	cd prebuiltLibrary
 	./build.sh
 	```
 
-3. 运行 app。
+3. Build and run your app
 
-### 运行结果
+### Preview
 
-运行截图：
+Screen shot:
 
 ![](images/screen-shot.png)
 
-日志输出：
+Logcat :
 
 ![](images/log.png)

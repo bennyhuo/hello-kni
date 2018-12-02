@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId 'com.example.hellojni'
         minSdkVersion 23
@@ -19,14 +20,10 @@ android {
     sourceSets {
         main {
             // let gradle pack the shared library into apk
-            jniLibs.srcDirs = ['../prebuiltLibrary/build/libs']
+            jniLibs.srcDirs += ['../prebuiltLibrary/build/libs']
         }
     }
-    externalNativeBuild {
-        cmake {
-            path "src/main/cpp/CMakeLists.txt"
-        }
-    }
+
     flavorDimensions 'cpuArch'
     productFlavors {
         arm7 {
@@ -35,31 +32,7 @@ android {
                 abiFilter 'armeabi-v7a'
             }
         }
-//        arm8 {
-//            dimension 'cpuArch'
-//            ndk {
-//                abiFilters 'arm64-v8a'
-//            }
-//        }
-//        x86 {
-//            dimension 'cpuArch'
-//            ndk {
-//                abiFilter 'x86'
-//            }
-//        }
-//        x86_64 {
-//            dimension 'cpuArch'
-//            ndk {
-//                abiFilter 'x86_64'
-//            }
-//        }
-//        universal {
-//            dimension 'cpuArch'
-//            // include all default ABIs. with NDK-r16,  it is:
-//            //   armeabi-v7a, arm64-v8a, x86, x86_64
-//        }
     }
-    buildToolsVersion '26.0.2'
 }
 
 dependencies {
