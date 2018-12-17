@@ -34,6 +34,8 @@ public class HelloJni extends AppCompatActivity {
 
         sayHello();
 
+        sayHello2();
+
         tv.append("\n");
         tv.append(callLoop());
     }
@@ -56,6 +58,7 @@ public class HelloJni extends AppCompatActivity {
     public native String  callLoop();
 
     public native void sayHello();
+    public native void sayHello2();
 
     public String callFromNative(){
         return "This is from Java!!";
