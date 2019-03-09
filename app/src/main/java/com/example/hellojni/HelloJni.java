@@ -37,7 +37,7 @@ public class HelloJni extends AppCompatActivity {
         sayHello2();
 
         tv.append("\n");
-        tv.append(callLoop());
+        tv.append(callJava());
     }
     /* A native method that is implemented by the
      * 'hello-jni' native library, which is packaged
@@ -55,7 +55,7 @@ public class HelloJni extends AppCompatActivity {
      * Trying to call this function will result in a
      * java.lang.UnsatisfiedLinkError exception !
      */
-    public native String  callLoop();
+    public native String  callJava();
 
     public native void sayHello();
     public native void sayHello2();
