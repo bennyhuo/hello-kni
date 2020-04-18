@@ -24,15 +24,7 @@ fun stringFromJNI(env: CPointer<JNIEnvVar>, thiz: jobject): jstring {
 
 ### 构建步骤
 
-1. 安装 Kotlin Native 编译器，当然你也可以自己编译。把编译器的路径（包含 konan 命令的目录）添加到 $PATH。
-2. 运行以下命令得到 Kotlin Native 编译好的依赖：
-
-	```sh
-	cd prebuiltLibrary
-	./build.sh
-	```
-
-3. 运行 app。
+直接运行 app 即可，依赖已经在 Gradle 当中配置好。
 
 ### 运行结果
 

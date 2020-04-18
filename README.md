@@ -24,15 +24,8 @@ What's in the demo：
 
 ### How to Build
 
-1. Install Kotlin Native compiler, export konanc to $PATH
-2. Run this shell：
 
-	```sh
-	cd prebuiltLibrary
-	./build.sh
-	```
-
-3. Build and run your app
+Simply Build and run your app. Dependencies are carefully managed by gradle.
 
 ### Preview
 
