@@ -30,20 +30,18 @@ kotlin {
 }
 
 android {
-    compileSdkVersion(26)
+    compileSdkVersion(30)
 
     defaultConfig {
         minSdkVersion(23)
-        targetSdkVersion(26)
+        targetSdkVersion(30)
 
         ndk {
-            abiFilters("armeabi-v7a")
+//            abiFilters("armeabi-v7a")
+            abiFilters += listOf("armeabi-v7a" )
         }
     }
-
-    sourceSets {
-        val main by getting {
+    sourceSets.getByName("main") {
             jniLibs.srcDir(jniLibDir)
-        }
     }
 }
