@@ -3,18 +3,20 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.konan.target.KonanTarget.*
 
 plugins {
-    kotlin("multiplatform") version "1.7.10"
+    kotlin("multiplatform") version "1.7.22"
     id("com.android.library")
 }
 
 val jniLibDir = File(project.buildDir, arrayOf("generated", "jniLibs").joinToString(File.separator))
+
+val sharedLib_name_prefix = "knlib"
 
 kotlin {
     android()
 
     val nativeConfigure: KotlinNativeTarget.() -> Unit = {
         binaries {
-            sharedLib("knlib") {
+            sharedLib(sharedLib_name_prefix) {
                 linkTask.doLast {
                     copy {
                         from(outputFile)
@@ -67,6 +69,11 @@ android {
     defaultConfig {
         minSdk = 23
         targetSdk = 33
+        buildConfigField(
+            "String",
+            "JNI_SHARED_LIB_NAME_PREFIX",
+            "$sharedLib_name_prefix"
+        )
     }
 
     sourceSets {
