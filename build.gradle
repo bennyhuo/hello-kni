@@ -6,6 +6,12 @@ buildscript {
         kotlin_version = "1.7.20"
     }
     repositories {
+        gradlePluginPortal()
+        mavenCentral()
+        google()
+        maven {
+            url = uri('https://maven.pkg.jetbrains.space/public/p/compose/dev')
+        }
         maven {
             url "https://mirrors.tencent.com/nexus/repository/maven-public/"
         }
@@ -20,6 +26,11 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()
+        google()
+        maven {
+            url = uri('https://maven.pkg.jetbrains.space/public/p/compose/dev')
+        }
         maven {
             url "https://mirrors.tencent.com/nexus/repository/maven-public/"
         }
