@@ -27,6 +27,52 @@ kotlin {
             }
         }
     }
+
+    androidNativeArm64{
+        binaries {
+            sharedLib("knlib") {
+                println("Show name $name")
+                println("Show NativeBuildType buildType $buildType")
+                // linkTask is default task
+                linkTask.doLast {
+                    copy {
+                        from(outputFile)
+                        into(File(jniLibDir, "arm64-v8a"))
+                    }
+                }
+
+                afterEvaluate {
+                    val preReleaseBuild by tasks.getting
+                    preReleaseBuild.dependsOn(linkTask)
+                }
+            }
+        }
+    }
+//    androidNativeX86{}
+//    androidNativeX64{}
+
+    //FIXME not gen so !! only blank jar file !! Jvm ? linux ?
+//    linuxX64("native") {
+//        binaries {
+//            sharedLib(namePrefix="knlib") {
+//                println("Show name $name")
+//                println("Show NativeBuildType buildType $buildType")
+//
+//                linkTask.doLast {
+//                    copy {
+//                        from(outputFile)
+//                        into(File(jniLibDir, "armeabi-v7a"))
+//                    }
+//                }
+//
+//                afterEvaluate {
+//                    println("Show task name  ${tasks.getting}")
+////                    val preReleaseBuild by tasks.getting//
+////                    preReleaseBuild.dependsOn(linkTask)
+//                }
+//            }
+//        }
+//    }
 }
 
 android {
@@ -38,7 +84,7 @@ android {
 
         ndk {
 //            abiFilters("armeabi-v7a")
-            abiFilters += listOf("armeabi-v7a" )
+            abiFilters += listOf("armeabi-v7a","arm64-v8a" )
         }
     }
     sourceSets.getByName("main") {
