@@ -6,11 +6,13 @@ plugins {
 }
 
 val jniLibDir = File(project.buildDir, arrayOf("generated", "jniLibs").joinToString(File.separator))
+val lib_name_namePrefix="knlib"
 
 kotlin {
+    android()
     androidNativeArm32 {
         binaries {
-            sharedLib("knlib") {
+            sharedLib(lib_name_namePrefix) {
                 if(buildType == NativeBuildType.RELEASE){
                     linkTask.doLast {
                         copy {
@@ -30,7 +32,7 @@ kotlin {
 
     androidNativeArm64{
         binaries {
-            sharedLib("knlib") {
+            sharedLib(lib_name_namePrefix) {
                 println("Show name $name")
                 println("Show NativeBuildType buildType $buildType")
                 // linkTask is default task
@@ -83,7 +85,6 @@ android {
         targetSdkVersion(30)
 
         ndk {
-//            abiFilters("armeabi-v7a")
             abiFilters += listOf("armeabi-v7a","arm64-v8a" )
         }
     }
