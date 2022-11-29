@@ -70,6 +70,7 @@ public class HelloJni extends AppCompatActivity {
      * installation time by the package manager.
      */
     static {
+        //FIXME here how call  lib_name_namePrefix  @ nativeLib gradle ?
         System.loadLibrary("knlib");
     }
 }
