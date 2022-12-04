@@ -19,6 +19,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.bennyhuo.kotlin.nativelib.BuildConfig;
+
 public class HelloJni extends AppCompatActivity {
 
     @Override
@@ -70,6 +72,6 @@ public class HelloJni extends AppCompatActivity {
      * installation time by the package manager.
      */
     static {
-        System.loadLibrary("knlib");
+        System.loadLibrary(BuildConfig.JNI_SHARED_LIB_NAME_PREFIX);
     }
 }
