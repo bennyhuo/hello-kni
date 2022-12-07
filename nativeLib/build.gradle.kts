@@ -1,10 +1,11 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.konan.target.KonanTarget.*
-
+import com.codingfeline.buildkonfig.compiler.FieldSpec
 plugins {
-    kotlin("multiplatform") version "1.7.22"
+    kotlin("multiplatform")
     id("com.android.library")
+    id("com.codingfeline.buildkonfig")
 }
 
 val jniLibDir = File(project.buildDir, arrayOf("generated", "jniLibs").joinToString(File.separator))
@@ -60,7 +61,14 @@ kotlin {
             androidNativeX64Main.dependsOn(this)
         }
     }
+}
 
+buildkonfig {
+    packageName = "com.example.hellojni.HelloJni"
+
+    defaultConfigs {
+        buildConfigField(FieldSpec.Type.STRING, "C_NAME_PREFIX_KCONFIG", "Java_"+packageName.toString().replace(".","_"))
+    }
 }
 
 android {
@@ -72,7 +80,7 @@ android {
         buildConfigField(
             "String",
             "JNI_SHARED_LIB_NAME_PREFIX",
-            "$sharedLib_name_prefix"
+            "\"$sharedLib_name_prefix\""
         )
     }
 
