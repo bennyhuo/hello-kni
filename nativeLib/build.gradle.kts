@@ -72,7 +72,7 @@ android {
         buildConfigField(
             "String",
             "JNI_SHARED_LIB_NAME_PREFIX",
-            "$sharedLib_name_prefix"
+            "\"$sharedLib_name_prefix\""
         )
     }
 
